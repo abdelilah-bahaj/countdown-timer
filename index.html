@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aesthetic Countdown</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', monospace;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .countdown-container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .countdown-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .time-number {
+            font-size: 4rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .time-label {
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .separator {
+            font-size: 4rem;
+            font-weight: 300;
+            align-self: flex-start;
+            margin-top: 0.2rem;
+            opacity: 0.5;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .background-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .countdown {
+                gap: 1.5rem;
+            }
+            
+            .time-number {
+                font-size: 2.5rem;
+            }
+            
+            .separator {
+                font-size: 2.5rem;
+            }
+            
+            .countdown-title {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .separator {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-effect"></div>
+    <div class="grid-overlay"></div>
+    
+    <div class="countdown-container">
+        <div class="countdown-title">Time Remaining</div>
+        <div class="countdown">
+            <div class="time-unit">
+                <div class="time-number" id="years">00</div>
+                <div class="time-label">Years</div>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <div class="time-number" id="months">00</div>
+                <div class="time-label">Months</div>
+            </div>
+            <div class="separator">:</div>
+            <div class="time-unit">
+                <div class="time-number" id="days">00</div>
+                <div class="time-label">Days</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set your target date here (YYYY-MM-DD)
+        const targetDate = new Date('2026-01-01T00:00:00');
+
+        function updateCountdown() {
+            const now = new Date();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                // Calculate years, months, and days
+                const years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365));
+                const months = Math.floor((difference % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30.44));
+                const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
+
+                // Update the display with leading zeros
+                document.getElementById('years').textContent = years.toString().padStart(2, '0');
+                document.getElementById('months').textContent = months.toString().padStart(2, '0');
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            } else {
+                // Countdown finished
+                document.getElementById('years').textContent = '00';
+                document.getElementById('months').textContent = '00';
+                document.getElementById('days').textContent = '00';
+                document.querySelector('.countdown-title').textContent = 'Time\'s Up!';
+            }
+        }
+
+        // Update countdown immediately and then every hour
+        updateCountdown();
+        setInterval(updateCountdown, 3600000); // Update every hour
+    </script>
+</body>
+</html>
