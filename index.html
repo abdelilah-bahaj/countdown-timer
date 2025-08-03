@@ -4,7 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aesthetic Countdown</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <style>
+        @font-face {
+            font-family: 'HomeVideo';
+            src: url('fonts/HomeVideo.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'PixelAe';
+            src: url('fonts/PixelAE-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'PixelAeBold';
+            src: url('fonts/PixelAE-Bold.ttf') format('truetype');
+            font-weight: bold;
+            font-style: normal;
+        }
+    </style>
     <style>
         * {
             margin: 0;
@@ -15,7 +37,7 @@
         body {
             background: #000000;
             color: #ffffff;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'HomeVideo', sans-serif;
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -61,6 +83,7 @@
             margin-bottom: 0.5rem;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
+            font-family: 'PixelAe', monospace;
         }
 
         .time-label {
@@ -78,6 +101,7 @@
             margin-top: 0.2rem;
             opacity: 0.5;
             animation: pulse 2s infinite;
+            font-family: 'PixelAe', monospace;
         }
 
         @keyframes pulse {
