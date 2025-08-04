@@ -195,35 +195,15 @@
     </div>
 
     <script>
-        // Set target date to 3 years from the next Monday (August 4, 2025)
-        const targetDate = new Date('2028-08-04T00:00:00');
-
         function updateCountdown() {
-            const now = new Date();
-            const difference = targetDate - now;
+    const now = new Date();
+    const difference = targetDate - now;
 
-            if (difference > 0) {
-                // Calculate years, months, and days
-                const years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365));
-                const months = Math.floor((difference % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30.44));
-                const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
-
-                // Update the display with leading zeros
-                document.getElementById('years').textContent = years.toString().padStart(2, '0');
-                document.getElementById('months').textContent = months.toString().padStart(2, '0');
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            } else {
-                // Countdown finished
-                document.getElementById('years').textContent = '00';
-                document.getElementById('months').textContent = '00';
-                document.getElementById('days').textContent = '00';
-                document.querySelector('.countdown-title').textContent = 'Time\'s Up!';
-            }
-        }
-
-        // Update countdown immediately and then every hour
-        updateCountdown();
-        setInterval(updateCountdown, 3600000); // Update every hour
+    if (difference > 0) {
+        // Calculate years, months, and days
+        const years = Math.floor(difference / (1000 * 60 * 60 * 24 * 365));
+        const months = Math.floor((difference % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30.44));
+        const days = Math.floor((difference % (1000 * 60 * 60 * 24 * 30.44)) / (1000 * 60 * 60 * 24));
     </script>
 </body>
 </html>
